@@ -8,21 +8,27 @@
 
 #define INFINITE_TIMEOUT -1
 
-struct __route {
+typedef struct __route {
   pthread_t *pthr_send;
   pthread_t *pthr_recv;
   
   sockaddr_in *addr_from;
   sockaddr_in *addr_local_to; 
   int sockfd;
-};
+} __route;
 
 __route
-*create_route(){
+*new_route(){
   __route *nr; /* new route */
   nr = malloc(sizeof(route));
   
   return nr;
+}
+
+void
+destroy_route(__route *r){
+  free(r);
+  return;
 }
 
 int
